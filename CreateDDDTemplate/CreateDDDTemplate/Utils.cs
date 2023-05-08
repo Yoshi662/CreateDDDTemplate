@@ -8,19 +8,20 @@ namespace CreateDDDTemplate
 		{
 			return Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
 		}
-		public static void ExecuteDotNet(string args)
+		public static int Execute(string command, string args)
 		{
 			Process dotnet = new Process()
 			{
 				StartInfo = new ProcessStartInfo()
 				{
-					FileName = "dotnet",
+					FileName = command,
 					Arguments = args,
 					CreateNoWindow = true,
 				}
 			};
 			dotnet.Start();
 			dotnet.WaitForExit();
+			return dotnet.ExitCode;
 		}
 	}
 }
